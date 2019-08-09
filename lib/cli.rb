@@ -1,16 +1,13 @@
 class CLI
   def run
     Scraper.new.make_teams
-    puts "CLI is running"
+    puts "Welcome to the 2018/19 Premier League Table."
+    puts "View different sections of the table and find more information on your favorite teams."
     start
-    # Team.all[1, 20].each do |team|
-    #   puts "#{team.rank} #{team.name}\nfull name - #{team.full_name}\nnickname - #{team.nickname}\nfounded - #{team.founded}\nground - #{team.ground}\ncapacity - #{team.capacity}\nowner - #{team.owner}\nchairman - #{team.chairman}\nmanager - #{team.manager}\n\n\n"
-    # end
-    # puts "#{Team.all[1].name}\nfull name - #{Team.all[1].full_name}\nnick name - #{Team.all[1].nickname}\n#{Team.all[1].founded}\n#{Team.all[1].ground}\n#{Team.all[1].capacity}\n#{Team.all[1].owner}\n#{Team.all[1].chairman}\n#{Team.all[1].manager}\n#{Team.all[1].website}"
   end
 
   def start
-    puts "Would you like to view the top of the table or the bottom of the table?"
+    puts "\n\nWould you like to view the top of the table or the bottom of the table?"
     puts "(please enter: 'top' or 'bottom')"
     input = gets.strip.downcase
 
@@ -21,7 +18,7 @@ class CLI
       input = 11
       show_table(input)
     else
-      puts "\nPlease enter a valid option.\n\n"
+      puts "\nPlease enter a valid option."
       start
     end
 
