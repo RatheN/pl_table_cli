@@ -1,5 +1,5 @@
 class Team
-  attr_accessor :rank, :name, :url, :full_name, :nickname, :founded, :alt_founded, :ground, :alt_ground, :capacity, :alt_capacity, :owner, :alt_owner, :chairman, :alt_chairman, :manager, :alt_manager, :website, :alt_website
+  attr_accessor :rank, :name, :url, :full_name, :nickname, :founded, :ground, :capacity, :owner, :chairman, :manager, :website
   @@all = []
 
   def initialize(rank = nil, name = nil, url = nil)
@@ -26,67 +26,61 @@ class Team
   end
 
   def full_name
-    @full_name = doc.css('table.infobox.vcard tr:nth-child(2) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
+    @full_name = doc.css("table.infobox.vcard tr:contains('Full name') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
   end
 
   def nickname
-    @nickname = doc.css('table.infobox.vcard tr:nth-child(3) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
+    @nickname = doc.css("table.infobox.vcard tr:contains('Nickname(s)') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
   end
 
   def founded
-    @founded = doc.css('table.infobox.vcard tr:nth-child(5) span:nth-child(1)').text.strip.delete_prefix("; ")[0, 13]
+    @founded = doc.css("table.infobox.vcard tr:contains('Founded') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
   end
 
-  def alt_founded
-    @alt_founded = doc.css('table.infobox.vcard tr:nth-child(4) span:nth-child(1)').text.strip.delete_prefix("; ")[0, 13]
-  end
 
   def ground
-    @ground = doc.css('table.infobox.vcard tr:nth-child(6) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
-  end
-
-  def alt_ground
-    @alt_ground = doc.css('table.infobox.vcard tr:nth-child(5) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
+    @ground = doc.css("table.infobox.vcard tr:contains('Ground') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
   end
 
   def capacity
-    @capacity = doc.css('table.infobox.vcard tr:nth-child(7) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
-  end
-
-  def alt_capacity
-    @alt_capacity = doc.css('table.infobox.vcard tr:nth-child(6) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
+    # @capacity = doc.css("table.infobox.vcard tr:contains('Capacity') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
+    @capacity = doc.css("table.infobox.vcard tr:contains('Capacity') td").text[0,6]
   end
 
   def owner
-    @owner = doc.css('table.infobox.vcard tr:nth-child(8) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
-  end
-
-  def alt_owner
-    @alt_owner = doc.css('table.infobox.vcard tr:nth-child(7) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
+    # @owner = doc.css("table.infobox.vcard tr:contains('Owner') td").text
+    if doc.css("table.infobox.vcard tr:contains('Owner') td").text != ""
+      @owner = doc.css("table.infobox.vcard tr:contains('Owner') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
+    else
+      @owner = "N/A"
+    end
   end
 
   def chairman
-    @chairman = doc.css('table.infobox.vcard tr:nth-child(9) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
+    if doc.css("table.infobox.vcard tr:contains('Chairman') td").text != ""
+      @chairman = doc.css("table.infobox.vcard tr:contains('Chairman') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
+    elsif doc.css("table.infobox.vcard tr:contains('Co-chairmen') td").text != ""
+      @chairman = doc.css("table.infobox.vcard tr:contains('Co-chairmen') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
+    else
+      @chairman = "N/A"
+    end
   end
-
-  def alt_chairman
-    @alt_chairman = doc.css('table.infobox.vcard tr:nth-child(8) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
-  end
-
 
   def manager
-    @manager = doc.css('table.infobox.vcard tr:nth-child(10) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
-  end
-
-  def alt_manager
-    @alt_manager = doc.css('table.infobox.vcard tr:nth-child(9) td').text.strip.delete_suffix("[1]").delete_suffix("[2]")
+    # @manager = doc.css("table.infobox.vcard tr:contains('Manager') td").text
+    if doc.css("table.infobox.vcard tr:contains('Manager') td").text != ""
+      @manager = doc.css("table.infobox.vcard tr:contains('Manager') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
+    elsif doc.css("table.infobox.vcard tr:contains('Head Coach') td").text != ""
+      @manager = doc.css("table.infobox.vcard tr:contains('Head Coach') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
+    elsif doc.css("table.infobox.vcard tr:contains('Head coach') td").text != ""
+      @manager = doc.css("table.infobox.vcard tr:contains('Head coach') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
+    else
+      @manager = "N/A"
+    end
   end
 
   def website
-    @website = doc.css('table.infobox.vcard tr:nth-child(13) a').attribute('href').text
+    @website = doc.css("table.infobox.vcard tr:contains('Website') a").attribute('href').text
   end
 
-  def alt_website
-    @alt_website = doc.css('table.infobox.vcard tr:nth-child(12) a').attribute('href').text
-  end
 end

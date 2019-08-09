@@ -53,26 +53,14 @@ class CLI
 
   def team_info(r)
     puts "---------------#{Team.all[r].full_name}---------------"
-    puts "Nickname(s):        #{Team.all[r].nickname}"
-
-    alt_teams = [5, 7, 8, 9, 13, 16, 17, 19, 20]
-    if alt_teams.any? {|n| n == r} == true
-      puts "Ground(stadium):        #{Team.all[r].alt_ground}"
-      puts "Capacity:               #{Team.all[r].alt_capacity}"
-      puts "Founded:                #{Team.all[r].alt_founded}"
-      puts "Owner:                  #{Team.all[r].alt_owner}"
-      puts "Chairman:               #{Team.all[r].alt_chairman}"
-      puts "Manager:                #{Team.all[r].alt_manager}"
-      puts "Website:                #{Team.all[r].alt_website}"
-    else
-      puts "Ground(stadium):        #{Team.all[r].ground}"
-      puts "Capacity:               #{Team.all[r].capacity}"
-      puts "Founded:                #{Team.all[r].founded}"
-      puts "Owner:                  #{Team.all[r].owner}"
-      puts "Chairman:               #{Team.all[r].chairman}"
-      puts "Manager:                #{Team.all[r].manager}"
-      puts "Website:                #{Team.all[r].website}"
-    end
+    puts "Nickname(s):          #{Team.all[r].nickname}"
+    puts "Ground(stadium):      #{Team.all[r].ground}"
+    puts "Capacity:             #{Team.all[r].capacity}"
+    puts "Founded:              #{Team.all[r].founded}"
+    puts "Owner:                #{Team.all[r].owner}"
+    puts "Chairman:             #{Team.all[r].chairman}"
+    puts "Manager:              #{Team.all[r].manager}"
+    puts "Website:              #{Team.all[r].website}"
   end
 
 end
