@@ -1,8 +1,6 @@
 # PlTableCli
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/pl_table_cli`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+PlTableCli is a CLI gem that, when run in the terminal, will display the top or the bottom of the 2018-19 Premier League Table based on the user's input. The user will then be prompted to enter a number that correlates to the team the user wants more information on. The information for each team is a list that contains the team's full name, nickname, grounds(stadium) and capacity, when the team was founded, owner(s), chairman, manager, and website.
 
 ## Installation
 
