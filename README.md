@@ -4,23 +4,13 @@ PlTableCli is a CLI gem that, when run in the terminal, will display the top or 
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'pl_table_cli'
-```
-
-And then execute:
+Execute:
 
     $ bundle
 
 Or install it yourself as:
 
     $ gem install pl_table_cli
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
