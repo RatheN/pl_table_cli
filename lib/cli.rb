@@ -122,7 +122,7 @@ class CLI
 
   def team_info(r)
     team = Team.all[r]
-    Scraper.scrape_team_page(team)
+    Scraper.scrape_team_page(team) if !team.full_name
     puts "\n\n---------------#{team.full_name}---------------\n\n"
     puts "Nickname(s):          #{team.nickname}"
     puts "Ground(stadium):      #{team.ground}"
