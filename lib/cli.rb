@@ -1,6 +1,8 @@
 class CLI
   def run
-    Scraper.new.make_teams
+    # Scraper.new.make_teams
+    teams = Scraper.scrape_index
+    Team.make_teams(teams)
     puts "Welcome to the 2018/19 Premier League Table."
     puts "View different sections of the table and find more information on your favorite teams."
     start
@@ -63,16 +65,29 @@ class CLI
     end
   end
 
-  def team_info(r)
-    puts "\n\n---------------#{Team.all[r].full_name}---------------\n\n"
-    puts "Nickname(s):          #{Team.all[r].nickname}"
-    puts "Ground(stadium):      #{Team.all[r].ground}"
-    puts "Capacity:             #{Team.all[r].capacity}"
-    puts "Founded:              #{Team.all[r].founded}"
-    puts "Owner(s):             #{Team.all[r].owner}"
-    puts "Chairman(Chairmen):   #{Team.all[r].chairman}"
-    puts "Manager:              #{Team.all[r].manager}"
-    puts "Website:              #{Team.all[r].website}"
-  end
+  # def team_info(r)
+  #   puts "\n\n---------------#{Team.all[r].full_name}---------------\n\n"
+  #   puts "Nickname(s):          #{Team.all[r].nickname}"
+  #   puts "Ground(stadium):      #{Team.all[r].ground}"
+  #   puts "Capacity:             #{Team.all[r].capacity}"
+  #   puts "Founded:              #{Team.all[r].founded}"
+  #   puts "Owner(s):             #{Team.all[r].owner}"
+  #   puts "Chairman(Chairmen):   #{Team.all[r].chairman}"
+  #   puts "Manager:              #{Team.all[r].manager}"
+  #   puts "Website:              #{Team.all[r].website}"
+  # end
 
+  def team_info(r)
+    team = Team.all[r]
+    Scraper.scrape_team_page(team)
+    puts "\n\n---------------#{team.full_name}---------------\n\n"
+    puts "Nickname(s):          #{team.nickname}"
+    puts "Ground(stadium):      #{team.ground}"
+    puts "Capacity:             #{team.capacity}"
+    puts "Founded:              #{team.founded}"
+    puts "Owner(s):             #{team.owner}"
+    puts "Chairman(Chairmen):   #{team.chairman}"
+    puts "Manager:              #{team.manager}"
+    puts "Website:              #{team.website}"
+  end
 end
