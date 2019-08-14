@@ -5,12 +5,18 @@ class CLI
     # Team.make_teams(teams)
     # puts "Welcome to the 2018/19 Premier League Table."
     # puts "View different sections of the table and find more information on your favorite teams."
+
+
+
     welcome
     setup
     prompt_for_table
     team_selection
     end_prompt
   end
+
+
+
 
   # def start
   #   puts "\n\nWould you like to view the top of the table or the bottom of the table?"
@@ -72,10 +78,10 @@ class CLI
     input = gets.strip.downcase
 
     if input == "top"
-      input = 1
+      input = 0
       show_table(input)
     elsif input == "bottom"
-      input = 11
+      input = 10
       show_table(input)
     else
       puts "\nPlease enter a valid option."
@@ -90,18 +96,18 @@ class CLI
     input = gets.strip.to_i
 
     if input >= 1 && input <= 20
-      team_info(input)
+      team_info(input-1)
     else
       while input < 1 || input > 20
         puts "Please enter a valid number from 1 - 20"
         input = gets.strip.to_i
       end
-      team_info(input)
+      team_info(input-1)
     end
   end
 
   def show_table(s)
-    if s == 1
+    if s == 0
       puts "\n\n----------Top of the 2018/19 Premier League Table----------\n\n"
       Team.all[s, 10].each do |t|
         puts "#{t.rank}.  #{t.name}"

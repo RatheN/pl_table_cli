@@ -25,9 +25,9 @@ class Scraper
   end
 
   def self.scrape_index
-    teams = self.get_page.css('.wikitable tr').map do |s|
+    teams = self.get_page.css('.wikitable tr:nth-of-type(1n+2)').map do |s|
       {
-        :rank => s.css('th').text.strip,
+        :rank => s.css("th").text.strip,
         :name => s.css('td:nth-child(2) a').text,
         :url => "https://en.wikipedia.org#{s.css('a').attribute('href')}"
       }
