@@ -34,22 +34,6 @@ class Scraper
     end
   end
 
-  # def self.scrape_team_page(url)
-  #   doc = Nokogiri::HTML(open(url))
-  #
-  #   team_information = doc.css("table.infobox.vcard").map do |i|
-  #     {
-  #       :full_name => i.css("tr:contains('Full name') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]'),
-  #       :nickname => i.css("tr:contains('Nickname(s)') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
-  #
-  #
-  #
-  #
-  #     }
-  #   end
-  # end
-
-
   def self.scrape_team_page(team)
     url = team.url
     doc = Nokogiri::HTML(open(url))
@@ -59,7 +43,7 @@ class Scraper
         team.nickname = i.css("tr:contains('Nickname(s)') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
         team.founded = i.css("tr:contains('Founded') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
         team.ground = i.css("tr:contains('Ground') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
-        team.capacity = i.css("tr:contains('Capacity') td").text[0,6]
+        team.capacity = i.css("tr:contains('Capacity') td").text[0, 6]
         if i.css("tr:contains('Owner') td").text != ""
           team.owner = i.css("tr:contains('Owner') td").text.delete_suffix('[1]').delete_suffix('[2]').delete_suffix('[3]').delete_suffix('[4]')
         else
@@ -82,7 +66,6 @@ class Scraper
           team.manager = "N/A"
         end
         team.website = i.css("tr:contains('Website') a").attribute('href')
-
     end
   end
 end
