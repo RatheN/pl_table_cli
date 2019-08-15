@@ -86,7 +86,7 @@
 # end
 
 class Team
-  attr_accessor :rank, :name, :url, :full_name, :nickname, :founded, :ground, :capacity, :owner, :chairman, :manager, :website, :team_info
+  attr_accessor :rank, :name, :url, :full_name, :nickname, :founded, :ground, :capacity, :owner, :chairman, :manager, :website
   @@all = []
 
   def initialize(hash)
@@ -96,14 +96,6 @@ class Team
 
   def self.make_teams(teams)
     teams.each {|t| self.new(t)}
-  end
-
-  def add_team_attributes(attributes_hash)
-    attributes_hash.each {|k, v| self.send(("#{k}="), v)}
-  end
-
-  def self.team_info
-    @team_info = Scraper.new.scrape_team_page(@url)
   end
 
   def self.all
